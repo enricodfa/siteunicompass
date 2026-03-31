@@ -55,7 +55,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 130px;
+      scroll-padding-top: 100px;
       font-size: 16px;
       -webkit-text-size-adjust: 100%;
     }
@@ -424,7 +424,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      padding-block: 5rem;
+      padding-block: 6rem;
     }
 
     .hero-badge {
@@ -454,13 +454,15 @@
     }
 
     .hero-headline {
-      font-size: clamp(2.25rem, 6vw, 3.875rem);
+      font-size: clamp(2.5rem, 6.5vw, 4.25rem);
       font-weight: 900;
-      line-height: 1.08;
+      line-height: 1.12;
       color: var(--white);
       margin-bottom: 1.25rem;
-      max-width: 13ch;
       letter-spacing: -0.02em;
+    }
+    .hero-line-1, .hero-line-2, .hero-line-3 {
+      display: block;
     }
     .hero-headline .accent {
       color: var(--blue);
@@ -468,7 +470,7 @@
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.1875rem);
+      font-size: clamp(1.125rem, 2.75vw, 1.375rem);
       color: rgba(255,255,255,0.68);
       line-height: 1.65;
       max-width: 44ch;
@@ -489,7 +491,7 @@
     ============================================= */
     #sobre {
       background: var(--white);
-      padding-block: 6rem;
+      padding-block: 4rem;
     }
 
     .about-grid {
@@ -595,7 +597,7 @@
     ============================================= */
     #servicos {
       background: var(--off-white);
-      padding-block: 6rem;
+      padding-block: 4rem;
     }
 
     .services-header {
@@ -692,7 +694,7 @@
     ============================================= */
     #contato {
       background: var(--white);
-      padding-block: 6rem;
+      padding-block: 4rem;
     }
 
     .contact-grid {
@@ -1148,11 +1150,13 @@
 
 
           <h1 class="hero-headline reveal reveal-delay-1">
-            Soluções <span class="accent">sob medida</span> para o seu negócio
+            <span class="hero-line-1">Organizamos sua empresa</span>
+            <span class="hero-line-2">para <span class="accent">crescer</span> com</span>
+            <span class="hero-line-3">eficiência e lucro</span>
           </h1>
 
           <p class="hero-sub reveal reveal-delay-2">
-            Consultoria especializada em crescimento e inovação. Como uma bússola que aponta o norte, guiamos sua empresa rumo ao sucesso.
+            Consultoria prática que melhora processos, reduz custos e traz mais controle para o seu negócio.
           </p>
 
           <div class="hero-ctas reveal reveal-delay-3">
@@ -1164,7 +1168,7 @@
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.554 4.121 1.523 5.854L0 24l6.335-1.502A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.796 9.796 0 01-5.006-1.372l-.357-.213-3.758.891.945-3.668-.233-.374A9.795 9.795 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
               </svg>
-              Fale Conosco
+              Falar no WhatsApp agora
             </a>
             <a href="#servicos" class="btn btn-outline-white">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -1188,39 +1192,32 @@
               <div class="about-ring about-ring-2"></div>
               <div class="about-ring about-ring-3"></div>
               <!-- Main compass SVG -->
-              <svg class="about-compass-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="100" r="96" stroke="#00AEEF" stroke-width="3"/>
+              <svg class="about-compass-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="200" r="196" stroke="#00AEEF" stroke-width="2"/>
+                <circle cx="200" cy="200" r="150" stroke="#00AEEF" stroke-width="1.5"/>
+                <circle cx="200" cy="200" r="100" stroke="#00AEEF" stroke-width="1"/>
                 <!-- Cardinal lines -->
-                <line x1="100" y1="4"   x2="100" y2="196" stroke="#E2E8F0" stroke-width="1"/>
-                <line x1="4"   y1="100" x2="196" y2="100" stroke="#E2E8F0" stroke-width="1"/>
+                <line x1="200" y1="4"   x2="200" y2="396" stroke="#00AEEF" stroke-width="1"/>
+                <line x1="4"   y1="200" x2="396" y2="200" stroke="#00AEEF" stroke-width="1"/>
                 <!-- Ordinal lines -->
-                <line x1="32"  y1="32"  x2="168" y2="168" stroke="#F1F5F9" stroke-width="1"/>
-                <line x1="168" y1="32"  x2="32"  y2="168" stroke="#F1F5F9" stroke-width="1"/>
-                <!-- Cardinal ticks -->
-                <line x1="100" y1="4"   x2="100" y2="18"  stroke="#00AEEF" stroke-width="3" stroke-linecap="round"/>
-                <line x1="100" y1="182" x2="100" y2="196" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="4"   y1="100" x2="18"  y2="100" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round"/>
-                <line x1="182" y1="100" x2="196" y2="100" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round"/>
-                <!-- N label -->
-                <text x="100" y="12" font-size="8" font-weight="700" fill="#00AEEF" text-anchor="middle" font-family="Inter,sans-serif">N</text>
-                <!-- North arrow (sky blue) -->
-                <polygon points="100,24 107,80 100,68 93,80" fill="#00AEEF"/>
-                <!-- South arrow (muted) -->
-                <polygon points="100,176 107,120 100,132 93,120" fill="#CBD5E1"/>
+                <line x1="61"  y1="61"  x2="339" y2="339" stroke="#00AEEF" stroke-width="0.75"/>
+                <line x1="339" y1="61"  x2="61"  y2="339" stroke="#00AEEF" stroke-width="0.75"/>
+                <!-- Ticks -->
+                <line x1="200" y1="4"   x2="200" y2="20"  stroke="#00AEEF" stroke-width="3"/>
+                <line x1="200" y1="380" x2="200" y2="396" stroke="#00AEEF" stroke-width="3"/>
+                <line x1="4"   y1="200" x2="20"  y2="200" stroke="#00AEEF" stroke-width="3"/>
+                <line x1="380" y1="200" x2="396" y2="200" stroke="#00AEEF" stroke-width="3"/>
+                <!-- Arrow N -->
+                <polygon points="200,30 210,110 200,90 190,110" fill="#00AEEF"/>
+                <!-- Arrow S -->
+                <polygon points="200,370 210,290 200,310 190,290" fill="#00AEEF" opacity="0.35"/>
+                <!-- Arrow E -->
+                <polygon points="370,200 290,210 310,200 290,190" fill="#00AEEF" opacity="0.35"/>
+                <!-- Arrow W -->
+                <polygon points="30,200 110,210 90,200 110,190" fill="#00AEEF" opacity="0.35"/>
                 <!-- Center -->
-                <circle cx="100" cy="100" r="14" fill="white" stroke="#00AEEF" stroke-width="2.5"/>
-                <circle cx="100" cy="100" r="5" fill="#00AEEF"/>
-                <!-- Degree marks (every 30°) -->
-                <g stroke="#CBD5E1" stroke-width="1" stroke-linecap="round">
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(30 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(60 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(120 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(150 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(210 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(240 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(300 100 100)"/>
-                  <line x1="100" y1="8" x2="100" y2="14" transform="rotate(330 100 100)"/>
-                </g>
+                <circle cx="200" cy="200" r="12" fill="#00AEEF"/>
+                <circle cx="200" cy="200" r="5" fill="none" stroke="white" stroke-width="1.5"/>
               </svg>
             </div>
           </div>
