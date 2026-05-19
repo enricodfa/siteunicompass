@@ -1139,5 +1139,87 @@
 
   })();
   </script>
+
+  <!-- ===================== LGPD COOKIE BANNER ===================== -->
+  <style>
+    #lgpd-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: rgba(10, 22, 38, 0.97);
+      border-top: 1px solid rgba(0,174,239,0.25);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+      transform: translateY(100%);
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 -4px 30px rgba(0,0,0,0.40);
+    }
+    #lgpd-banner.visible { transform: translateY(0); }
+    .lgpd-text { display: flex; align-items: flex-start; gap: 0.875rem; flex: 1; min-width: 0; }
+    .lgpd-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .lgpd-text p { font-size: 0.875rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin: 0; }
+    .lgpd-text p strong { color: #fff; }
+    .lgpd-text a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+    .lgpd-text a:hover { color: #fff; }
+    .lgpd-btns { display: flex; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap; }
+    .lgpd-btn-accept {
+      background: var(--blue); color: #fff; border: none;
+      padding: 0.625rem 1.375rem; border-radius: var(--radius-sm);
+      font-family: var(--font); font-size: 0.875rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .lgpd-btn-accept:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .lgpd-btn-decline {
+      background: transparent; color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 0.625rem 1.375rem; border-radius: var(--radius-sm);
+      font-family: var(--font); font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .lgpd-btn-decline:hover { color: #fff; border-color: rgba(255,255,255,0.45); }
+    @media (max-width: 600px) {
+      #lgpd-banner { flex-direction: column; align-items: stretch; }
+      .lgpd-btns { justify-content: stretch; }
+      .lgpd-btn-accept, .lgpd-btn-decline { flex: 1; text-align: center; }
+    }
+  </style>
+
+  <div id="lgpd-banner" role="dialog" aria-label="Aviso de cookies e privacidade" aria-live="polite">
+    <div class="lgpd-text">
+      <span class="lgpd-icon">🍪</span>
+      <p>
+        <strong>Privacidade e Cookies.</strong> Este site utiliza cookies para melhorar sua experiência de navegação.
+        Ao continuar, você concorda com nossa política de uso de dados, em conformidade com a
+        <strong>Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)</strong>.
+        <a href="mailto:contato@unicompass.com.br">Saiba mais ou entre em contato.</a>
+      </p>
+    </div>
+    <div class="lgpd-btns">
+      <button class="lgpd-btn-decline" id="lgpd-decline">Apenas essenciais</button>
+      <button class="lgpd-btn-accept" id="lgpd-accept">Aceitar todos</button>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const banner = document.getElementById('lgpd-banner');
+    const KEY = 'unicompass_lgpd';
+
+    if (!localStorage.getItem(KEY)) {
+      setTimeout(() => banner.classList.add('visible'), 800);
+    }
+
+    function dismiss(value) {
+      localStorage.setItem(KEY, value);
+      banner.classList.remove('visible');
+    }
+
+    document.getElementById('lgpd-accept').addEventListener('click',  () => dismiss('accepted'));
+    document.getElementById('lgpd-decline').addEventListener('click', () => dismiss('essential'));
+  })();
+  </script>
 </body>
 </html>
