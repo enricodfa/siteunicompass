@@ -480,6 +480,50 @@
     .ci-value a { color: var(--text-primary); transition: color var(--transition); }
     .ci-value a:hover { color: var(--blue); }
 
+    /* Active nav link */
+    .nav-links a.active { color: var(--blue) !important; }
+    .nav-links a.active::after { transform: translateX(-50%) scaleX(1); }
+
+    /* Depoimentos */
+    #depoimentos { padding-top: 0.5rem; padding-bottom: 6rem; }
+    .dep-header { margin-bottom: 3rem; }
+    .dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 1024px) { .dep-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .dep-grid { grid-template-columns: 1fr; } }
+    .dep-card { padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .dep-stars { display: flex; gap: 3px; }
+    .dep-stars span { color: #f59e0b; font-size: 1rem; }
+    .dep-quote { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; font-style: italic; flex: 1; }
+    .dep-quote.empty {
+      min-height: 80px;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 60%, transparent 60%, transparent 100%);
+      background-size: 120px 12px; background-repeat: repeat;
+      border-radius: 4px; font-style: normal; color: transparent;
+    }
+    .dep-author { display: flex; align-items: center; gap: 0.875rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem; }
+    .dep-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(0,174,239,0.15); border: 1px solid rgba(0,174,239,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; flex-shrink: 0;
+    }
+    .dep-avatar.empty { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.10); }
+    .dep-name { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); }
+    .dep-role { font-size: 0.8rem; color: var(--text-muted); margin-top: 1px; }
+    .dep-name.empty, .dep-role.empty {
+      height: 12px; border-radius: 6px;
+      background: rgba(255,255,255,0.10); color: transparent;
+    }
+    .dep-name.empty { width: 120px; margin-bottom: 6px; }
+    .dep-role.empty { width: 80px; }
+    .dep-placeholder-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(0,174,239,0.08); border: 1px dashed rgba(0,174,239,0.30);
+      border-radius: 20px; padding: 0.3rem 0.875rem;
+      font-size: 0.72rem; color: rgba(0,174,239,0.6); font-weight: 600;
+      letter-spacing: 0.05em; margin-bottom: 0.75rem;
+    }
+
     /* CTA band */
     .cta-band {
       margin-block: 2rem; padding: 3rem 2rem;
@@ -786,6 +830,68 @@
       </div>
     </section>
 
+    <!-- ===================== DEPOIMENTOS ===================== -->
+    <section id="depoimentos" aria-label="Depoimentos de clientes">
+      <div class="container">
+        <div class="dep-header reveal">
+          <span class="section-label">Depoimentos</span>
+          <h2 class="section-title">O que nossos clientes dizem</h2>
+          <p class="section-desc">Resultados reais de empresas que confiaram na Unicompass para crescer.</p>
+        </div>
+        <div class="dep-grid">
+
+          <!-- Card 1 — vazio -->
+          <div class="glass-card dep-card reveal reveal-delay-1">
+            <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+            <div class="dep-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div class="dep-quote empty"> </div>
+            <div class="dep-author">
+              <div class="dep-avatar empty"></div>
+              <div>
+                <div class="dep-name empty"> </div>
+                <div class="dep-role empty"> </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 — vazio -->
+          <div class="glass-card dep-card reveal reveal-delay-2">
+            <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+            <div class="dep-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div class="dep-quote empty"> </div>
+            <div class="dep-author">
+              <div class="dep-avatar empty"></div>
+              <div>
+                <div class="dep-name empty"> </div>
+                <div class="dep-role empty"> </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 — vazio -->
+          <div class="glass-card dep-card reveal reveal-delay-3">
+            <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+            <div class="dep-stars">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <div class="dep-quote empty"> </div>
+            <div class="dep-author">
+              <div class="dep-avatar empty"></div>
+              <div>
+                <div class="dep-name empty"> </div>
+                <div class="dep-role empty"> </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== CTA BAND ===================== -->
     <div class="container">
       <div class="cta-band reveal">
@@ -980,11 +1086,25 @@
   (function () {
     'use strict';
 
-    // --- Navbar scroll ---
+    // --- Navbar scroll + active link ---
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('main section[id]');
+
+    function updateActiveLink() {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
+      const scrollY = window.scrollY + 120;
+      let current = '';
+      sections.forEach(sec => {
+        if (sec.offsetTop <= scrollY) current = sec.getAttribute('id');
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    updateActiveLink();
 
     // --- Mobile menu ---
     const hamburger   = document.getElementById('hamburger');
