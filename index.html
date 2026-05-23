@@ -1710,15 +1710,16 @@
       const dots = dotsContainer.querySelectorAll('button');
 
       function update() {
-        const docH = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = Math.max(0, Math.min(1, window.scrollY / Math.max(1, docH)));
-        fill.style.height = (pct * 100) + '%';
-
         const navH = 136;
         const probe = window.scrollY + navH + 20;
         let activeIdx = 0;
         sectionEls.forEach((s, i) => { if (s.offsetTop <= probe) activeIdx = i; });
         dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+
+        const pct = sectionEls.length > 1
+          ? (activeIdx / (sectionEls.length - 1)) * 100
+          : 0;
+        fill.style.height = pct + '%';
       }
       window.addEventListener('scroll', update, { passive: true });
       update();
