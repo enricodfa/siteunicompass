@@ -42,7 +42,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 104px; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    html { scroll-behavior: smooth; scroll-padding-top: 136px; font-size: 16px; -webkit-text-size-adjust: 100%; }
     body {
       font-family: var(--font);
       background: linear-gradient(160deg, #0d2137 0%, var(--navy-dark) 30%, var(--navy) 65%, #0a2a45 100%);
@@ -1701,7 +1701,10 @@
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.setAttribute('aria-label', 'Ir para ' + sec.id);
-        dot.addEventListener('click', () => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        dot.addEventListener('click', () => {
+          const offset = sec.getBoundingClientRect().top + window.scrollY - 136;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        });
         dotsContainer.appendChild(dot);
       });
       const dots = dotsContainer.querySelectorAll('button');
