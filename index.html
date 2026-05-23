@@ -599,7 +599,7 @@
     @media (max-width: 768px) { .geo { display: none; } }
 
     /* ---- Scroll progress rail ---- */
-    #scroll-rail { position: fixed; top: 50%; right: 18px; transform: translateY(-50%); z-index: 950; width: 2px; height: 220px; background: rgba(255,255,255,0.07); border-radius: 2px; }
+    #scroll-rail { position: fixed; top: 50%; right: 28px; transform: translateY(-50%); z-index: 950; width: 2px; height: 220px; background: rgba(255,255,255,0.07); border-radius: 2px; }
     #scroll-fill { width: 100%; background: linear-gradient(180deg, #00AEEF, #0077b6); border-radius: 2px; height: 0%; box-shadow: 0 0 12px rgba(0,174,239,0.6); transition: height 0.15s linear; position: relative; }
     #scroll-fill::after { content:''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: #00AEEF; box-shadow: 0 0 14px #00AEEF, 0 0 28px rgba(0,174,239,0.5); }
     .scroll-section-dots { position: absolute; top: 0; right: -3px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; pointer-events: auto; }
@@ -1714,7 +1714,8 @@
         const pct = Math.max(0, Math.min(1, window.scrollY / Math.max(1, docH)));
         fill.style.height = (pct * 100) + '%';
 
-        const probe = window.scrollY + window.innerHeight * 0.4;
+        const navH = 136;
+        const probe = window.scrollY + navH + 20;
         let activeIdx = 0;
         sectionEls.forEach((s, i) => { if (s.offsetTop <= probe) activeIdx = i; });
         dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
