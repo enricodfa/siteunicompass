@@ -1431,20 +1431,23 @@
     const countObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
+        countObs.unobserve(e.target);
         const el = e.target;
         const target = +el.dataset.target;
         const prefix = el.dataset.prefix || '';
-        let current = 0;
-        const step = Math.max(1, Math.ceil(target / 50));
-        const tick = () => {
-          current = Math.min(current + step, target);
-          el.textContent = prefix + current;
-          if (current < target) requestAnimationFrame(tick);
+        const duration = 1800;
+        const startTime = performance.now();
+        el.textContent = prefix + '0';
+        const tick = (now) => {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = prefix + Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
-        countObs.unobserve(el);
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.4 });
     counters.forEach(el => countObs.observe(el));
 
     // --- Chatbot ---
