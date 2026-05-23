@@ -554,8 +554,204 @@
     .footer-copy { font-size: 0.8125rem; color: rgba(255,255,255,0.28); }
     @media (max-width: 640px) { .footer-inner { flex-direction: column; text-align: center; } .footer-links { justify-content: center; } }
   </style>
+
+  <style id="premium">
+    /* ---- Body becomes the stage ---- */
+    body { background: #08182a; background-attachment: scroll; position: relative; }
+    .bg-stage {
+      position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none;
+      background:
+        radial-gradient(60% 80% at 12% 18%, rgba(0,119,182,0.55) 0%, transparent 60%),
+        radial-gradient(50% 60% at 88% 30%, rgba(0,174,239,0.30) 0%, transparent 65%),
+        radial-gradient(55% 70% at 50% 95%, rgba(11,62,108,0.65) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1f33 0%, #122c47 45%, #0a2540 100%);
+    }
+    .bg-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.55; mix-blend-mode: screen; }
+    .bg-orb.o1 { width: 520px; height: 520px; left: -120px; top: -120px;
+      background: radial-gradient(circle, #00AEEF 0%, transparent 70%);
+      animation: orb-drift-1 26s ease-in-out infinite; }
+    .bg-orb.o2 { width: 460px; height: 460px; right: -100px; top: 30%;
+      background: radial-gradient(circle, #0077b6 0%, transparent 70%);
+      animation: orb-drift-2 32s ease-in-out infinite; }
+    .bg-orb.o3 { width: 580px; height: 580px; left: 40%; bottom: -200px;
+      background: radial-gradient(circle, #00AEEF 0%, transparent 70%);
+      animation: orb-drift-3 38s ease-in-out infinite; opacity: 0.40; }
+    @keyframes orb-drift-1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(80px,60px)} }
+    @keyframes orb-drift-2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-60px,40px)} }
+    @keyframes orb-drift-3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-80px)} }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,174,239,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,174,239,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 30%, transparent 80%);
+      opacity: 0.7;
+    }
+    #particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; width: 100%; height: 100%; }
+    .geo { position: fixed; pointer-events: none; z-index: -1; border: 1px solid rgba(0,174,239,0.18); opacity: 0.55; }
+    .geo.g1 { top: 18%; left: 8%; width: 56px; height: 56px; border-radius: 12px; transform: rotate(15deg); animation: geo-float 14s ease-in-out infinite; }
+    .geo.g2 { top: 60%; right: 6%; width: 36px; height: 36px; border-radius: 50%; border-color: rgba(255,255,255,0.10); animation: geo-float 18s ease-in-out infinite reverse; }
+    .geo.g3 { top: 85%; left: 12%; width: 24px; height: 24px; border-color: rgba(0,174,239,0.30); animation: geo-float 12s ease-in-out infinite; }
+    @keyframes geo-float { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-24px) rotate(20deg)} }
+    @media (max-width: 768px) { .geo { display: none; } }
+
+    /* ---- Scroll progress rail ---- */
+    #scroll-rail { position: fixed; top: 50%; right: 18px; transform: translateY(-50%); z-index: 950; width: 2px; height: 220px; background: rgba(255,255,255,0.07); border-radius: 2px; }
+    #scroll-fill { width: 100%; background: linear-gradient(180deg, #00AEEF, #0077b6); border-radius: 2px; height: 0%; box-shadow: 0 0 12px rgba(0,174,239,0.6); transition: height 0.15s linear; position: relative; }
+    #scroll-fill::after { content:''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: #00AEEF; box-shadow: 0 0 14px #00AEEF, 0 0 28px rgba(0,174,239,0.5); }
+    .scroll-section-dots { position: absolute; top: 0; right: -3px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; pointer-events: auto; }
+    .scroll-section-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.20); border: 1px solid rgba(0,174,239,0.30); transition: all 0.3s ease; cursor: pointer; padding: 0; }
+    .scroll-section-dots button.active { background: #00AEEF; box-shadow: 0 0 10px rgba(0,174,239,0.8); transform: scale(1.4); }
+    .scroll-section-dots button:hover { background: rgba(0,174,239,0.6); }
+    @media (max-width: 900px) { #scroll-rail { display: none; } }
+
+    /* ---- Hero entry ---- */
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(28px) scale(0.96); filter: blur(6px); }
+      to   { opacity: 1; transform: translateY(0)     scale(1);    filter: blur(0); }
+    }
+    .hero-content > .reveal.visible,
+    .hero-compass-wrap.reveal.visible { animation: hero-in 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+    .hero-content > .reveal-delay-1.visible { animation-delay: 0.05s; }
+    .hero-content > .reveal-delay-2.visible { animation-delay: 0.20s; }
+    .hero-content > .reveal-delay-3.visible { animation-delay: 0.35s; }
+
+    .hero-content { will-change: transform; transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1); }
+    .hero-compass-wrap { will-change: transform; transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1); perspective: 1000px; }
+
+    /* New trust badge */
+    .hero-trust-badge {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: linear-gradient(135deg, rgba(37,211,102,0.16), rgba(0,174,239,0.10));
+      border: 1px solid rgba(37,211,102,0.40);
+      border-radius: 999px;
+      padding: 0.45rem 1rem 0.45rem 0.5rem;
+      font-size: 0.82rem; font-weight: 600; color: #fff;
+      margin-bottom: 1.25rem; backdrop-filter: blur(8px);
+      box-shadow: 0 4px 18px rgba(37,211,102,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .hero-trust-badge .check { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #25D366, #1EA952); color: #fff; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(37,211,102,0.18); }
+    .hero-trust-badge .check svg { width: 11px; height: 11px; }
+    @media (max-width: 900px) { .hero-trust-badge { margin-inline: auto; } }
+
+    .floaty { animation: floaty 6s ease-in-out infinite; }
+    .floaty-2 { animation: floaty 8s ease-in-out infinite -2s; }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    /* =================== COMPASS HOLOGRAPHIC =================== */
+    .compass-3d { transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1); will-change: transform; width: 100%; max-width: 520px; position: relative; }
+    .compass-halo { position: absolute; inset: -10%; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(0,174,239,0.50) 0%, transparent 50%); filter: blur(40px); animation: halo-pulse 4s ease-in-out infinite; z-index: -1; }
+    @keyframes halo-pulse { 0%,100%{opacity:0.55;transform:scale(0.92)} 50%{opacity:1;transform:scale(1.10)} }
+
+    .orbits { position: absolute; inset: 0; pointer-events: none; }
+    .orbit { position: absolute; top: 50%; left: 50%; border-radius: 50%; transform: translate(-50%, -50%); border: 1px dashed rgba(0,174,239,0.18); }
+    .orbit.o-1 { width: 96%; height: 96%; animation: ring-cw 24s linear infinite; }
+    .orbit.o-2 { width: 80%; height: 80%; animation: ring-ccw 18s linear infinite; border-style: solid; border-color: rgba(255,255,255,0.06); }
+    .orbit.o-3 { width: 66%; height: 66%; animation: ring-cw 14s linear infinite; border-color: rgba(0,174,239,0.20); border-style: dotted; }
+    .orbit .sat { position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: #00AEEF; box-shadow: 0 0 12px #00AEEF, 0 0 28px rgba(0,174,239,0.7); }
+    .orbit .sat.alt { background: #fff; box-shadow: 0 0 10px #fff, 0 0 24px rgba(0,174,239,0.5); }
+    .orbit .sat.small { width: 6px; height: 6px; box-shadow: 0 0 8px #00AEEF, 0 0 18px rgba(0,174,239,0.5); }
+    .orbit .sat.s2 { top: 50%; left: -5px; transform: translateY(-50%); }
+    .orbit .sat.s3 { top: 50%; right: -5px; left: auto; transform: translateY(-50%); }
+
+    .holo-scan { position: absolute; inset: 14%; border-radius: 50%; background: linear-gradient(180deg, transparent 40%, rgba(0,174,239,0.14) 50%, transparent 60%); animation: holo-scan 4.5s linear infinite; pointer-events: none; mix-blend-mode: screen; }
+    @keyframes holo-scan { 0%{transform:translateY(-25%);opacity:0} 30%,70%{opacity:1} 100%{transform:translateY(25%);opacity:0} }
+
+    /* =================== PREMIUM CARDS =================== */
+    .glass-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.025) 100%);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(14px) saturate(1.1);
+      -webkit-backdrop-filter: blur(14px) saturate(1.1);
+      transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s, border-color 0.35s;
+    }
+    .glass-card::before { content:''; position: absolute; inset: 0; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(0,174,239,0.22), transparent 60%); opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0; }
+    .glass-card::after { content:''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 35%); mix-blend-mode: overlay; opacity: 0.6; }
+    .glass-card > * { position: relative; z-index: 1; }
+    .glass-card:hover::before { opacity: 1; }
+    .glass-card:hover {
+      border-color: rgba(0,174,239,0.45);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.45), 0 0 30px rgba(0,174,239,0.20), inset 0 1px 0 rgba(255,255,255,0.10);
+      transform: translateY(-6px);
+    }
+    .tilt { will-change: transform; transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1); }
+
+    /* Service icon badges */
+    .servico-icon-badge { width: 54px; height: 54px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0,174,239,0.22), rgba(0,119,182,0.10));
+      border: 1px solid rgba(0,174,239,0.40);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #00AEEF; margin-bottom: 1.1rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 6px 18px rgba(0,174,239,0.16);
+      transition: transform 0.35s; position: relative; }
+    .servico-icon-badge svg { width: 26px; height: 26px; }
+    .glass-card:hover .servico-icon-badge { transform: scale(1.08) rotate(-3deg); }
+
+    /* Stagger cascade */
+    .cascade > .reveal { transition-delay: calc(var(--i, 0) * 90ms); }
+
+    /* Buttons: shine + ripple */
+    .btn-primary, .btn-outline, .btn-wa-nav, .btn-submit { position: relative; overflow: hidden; isolation: isolate; }
+    .btn-primary::before { content:''; position: absolute; inset: -2px; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%); transform: translateX(-110%); transition: transform 0.7s; pointer-events: none; z-index: 0; }
+    .btn-primary:hover::before { transform: translateX(110%); }
+    .btn-primary > *, .btn-outline > *, .btn-submit > * { position: relative; z-index: 1; }
+    .ripple { position: absolute; border-radius: 50%; transform: translate(-50%,-50%) scale(0); background: rgba(255,255,255,0.4); pointer-events: none; animation: ripple-anim 0.7s cubic-bezier(0.4,0,0.2,1) forwards; z-index: 0; }
+    @keyframes ripple-anim { to { transform: translate(-50%,-50%) scale(4); opacity: 0; } }
+
+    /* Input focus polish */
+    .form-control { transition: border-color 0.25s, box-shadow 0.25s, background 0.25s, transform 0.25s; }
+    .form-control:focus { background: rgba(255,255,255,0.10); transform: translateY(-1px); }
+
+    /* =================== TESTIMONIALS CAROUSEL =================== */
+    .dep-marquee { position: relative; overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      padding: 1rem 0; }
+    .dep-track { display: flex; gap: 1.5rem; width: max-content; animation: dep-scroll 50s linear infinite; }
+    .dep-marquee:hover .dep-track { animation-play-state: paused; }
+    @keyframes dep-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .dep-marquee .dep-card { width: 380px; flex-shrink: 0; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    @media (max-width: 480px) { .dep-marquee .dep-card { width: 300px; padding: 1.5rem; } }
+    .dep-card .dep-avatar.photo { width: 52px; height: 52px; background: linear-gradient(135deg, #00AEEF, #0077b6); color: #fff; font-weight: 800; font-size: 1.1rem; border: 2px solid rgba(255,255,255,0.18); box-shadow: 0 0 0 3px rgba(0,174,239,0.18); display:flex; align-items:center; justify-content:center; }
+    .dep-stars span { display: inline-block; animation: star-twinkle 2.5s ease-in-out infinite; }
+    .dep-stars span:nth-child(1){animation-delay:0s}
+    .dep-stars span:nth-child(2){animation-delay:0.15s}
+    .dep-stars span:nth-child(3){animation-delay:0.30s}
+    .dep-stars span:nth-child(4){animation-delay:0.45s}
+    .dep-stars span:nth-child(5){animation-delay:0.60s}
+    @keyframes star-twinkle { 0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 transparent)} 50%{transform:scale(1.2);filter:drop-shadow(0 0 8px rgba(245,158,11,0.7))} }
+
+    .nav-links a::after { transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-orb, .geo, .floaty, .compass-halo, .holo-scan, .orbit, .dep-track, .dep-stars span { animation: none !important; }
+      .hero-content > .reveal.visible, .hero-compass-wrap.reveal.visible { animation: none; }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ===================== BACKGROUND STAGE ===================== -->
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-orb o1"></div>
+    <div class="bg-orb o2"></div>
+    <div class="bg-orb o3"></div>
+  </div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="geo g1" aria-hidden="true"></div>
+  <div class="geo g2" aria-hidden="true"></div>
+  <div class="geo g3" aria-hidden="true"></div>
+
+  <!-- ===================== SCROLL RAIL ===================== -->
+  <div id="scroll-rail" aria-hidden="true">
+    <div id="scroll-fill"></div>
+    <div class="scroll-section-dots" id="section-dots"></div>
+  </div>
 
   <!-- ===================== NAVBAR ===================== -->
   <nav id="navbar" role="navigation" aria-label="Navegação principal">
@@ -625,8 +821,20 @@
 
           <!-- Right: Advanced compass SVG -->
           <div class="hero-compass-wrap reveal reveal-delay-2" aria-hidden="true">
-            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg"
-                 style="width:100%;max-width:520px;filter:drop-shadow(0 0 48px rgba(0,174,239,0.18)) drop-shadow(0 0 120px rgba(0,174,239,0.06))">
+            <div class="compass-3d" id="compass-3d">
+              <div class="compass-halo"></div>
+
+              <!-- Orbital satellites -->
+              <div class="orbits">
+                <div class="orbit o-1"><span class="sat"></span><span class="sat alt s2"></span></div>
+                <div class="orbit o-2"><span class="sat small s3"></span><span class="sat small"></span></div>
+                <div class="orbit o-3"><span class="sat alt small s2"></span></div>
+              </div>
+
+              <div class="holo-scan"></div>
+
+              <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg"
+                   style="width:100%;max-width:520px;filter:drop-shadow(0 0 48px rgba(0,174,239,0.22)) drop-shadow(0 0 120px rgba(0,174,239,0.08))">
 
               <!-- Ambient glow -->
               <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
@@ -722,6 +930,7 @@
               <!-- Center halo -->
               <circle class="c-glow" cx="200" cy="200" r="55" fill="url(#centerGlow)"/>
             </svg>
+            </div>
           </div>
 
         </div>
@@ -759,20 +968,20 @@
           <h2 class="section-title">Orientando negócios rumo ao<br/>crescimento sustentável</h2>
           <p class="section-desc">Somos uma consultoria comprometida com o sucesso de cada cliente, oferecendo soluções estratégicas e personalizadas para o seu negócio.</p>
         </div>
-        <div class="sobre-grid">
-          <div class="glass-card sobre-card reveal reveal-delay-1">
+        <div class="sobre-grid cascade">
+          <div class="glass-card sobre-card tilt reveal" style="--i:0">
             <div class="sobre-icon">🎯</div>
             <div class="sobre-card-label">Missão</div>
             <h3>Nossa Missão</h3>
             <p>Orientar empresas com soluções estratégicas que geram crescimento real e sustentável, impactando positivamente cada negócio que atendemos.</p>
           </div>
-          <div class="glass-card sobre-card reveal reveal-delay-2">
+          <div class="glass-card sobre-card tilt reveal" style="--i:1">
             <div class="sobre-icon">🌟</div>
             <div class="sobre-card-label">Visão</div>
             <h3>Nossa Visão</h3>
             <p>Ser referência em consultoria empresarial, reconhecida pela excelência e pelo impacto real nos resultados dos nossos clientes.</p>
           </div>
-          <div class="glass-card sobre-card reveal reveal-delay-3">
+          <div class="glass-card sobre-card tilt reveal" style="--i:2">
             <div class="sobre-icon">💎</div>
             <div class="sobre-card-label">Valores</div>
             <h3>Nossos Valores</h3>
@@ -790,39 +999,51 @@
           <h2 class="section-title">Soluções completas para<br/>impulsionar seu negócio</h2>
           <p class="section-desc">Oferecemos serviços especializados em diversas áreas para garantir o crescimento e a sustentabilidade da sua empresa.</p>
         </div>
-        <div class="servicos-grid">
-          <div class="glass-card servico-card reveal reveal-delay-1">
-            <div class="servico-icon">🧭</div>
+        <div class="servicos-grid cascade">
+          <div class="glass-card servico-card tilt reveal" style="--i:0">
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 19 21 12 17 5 21 12 2"/></svg>
+            </div>
             <div class="servico-cat">Estratégia</div>
             <h3>Consultoria Empresarial</h3>
             <p>Orientação especializada em finanças corporativas, planejamento estratégico e gestão operacional para maximizar seus resultados.</p>
           </div>
-          <div class="glass-card servico-card reveal reveal-delay-2">
-            <div class="servico-icon">👥</div>
+          <div class="glass-card servico-card tilt reveal" style="--i:1">
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
             <div class="servico-cat">Talentos</div>
             <h3>R&amp;S — Recrutamento &amp; Seleção</h3>
             <p>Soluções personalizadas de recrutamento e seleção, encontrando os profissionais certos para o crescimento da sua empresa.</p>
           </div>
-          <div class="glass-card servico-card reveal reveal-delay-3">
-            <div class="servico-icon">🌱</div>
+          <div class="glass-card servico-card tilt reveal" style="--i:2">
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z"/><path d="M9 9c1 2 4 2 6 0"/><path d="M12 5v8"/></svg>
+            </div>
             <div class="servico-cat">Sustentabilidade</div>
             <h3>ESG</h3>
             <p>Assessoria na integração de práticas sustentáveis e responsáveis, alinhando seu negócio às exigências ambientais, sociais e de governança.</p>
           </div>
-          <div class="glass-card servico-card reveal reveal-delay-1">
-            <div class="servico-icon">📚</div>
+          <div class="glass-card servico-card tilt reveal" style="--i:3">
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
             <div class="servico-cat">Capacitação</div>
             <h3>Treinamentos</h3>
             <p>Programas de treinamento em áreas empresarial, organizacional e liderança, desenvolvendo competências essenciais na sua equipe.</p>
           </div>
-          <div class="glass-card servico-card reveal reveal-delay-2">
-            <div class="servico-icon">🤝</div>
+          <div class="glass-card servico-card tilt reveal" style="--i:4">
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M19 8v6"/><path d="M22 11h-6"/></svg>
+            </div>
             <div class="servico-cat">Pessoas</div>
             <h3>DHO</h3>
             <p>Desenvolvimento Humano e Organizacional: identificamos e desenvolvemos talentos, criando ambientes de alta performance.</p>
           </div>
-          <div class="glass-card servico-card reveal reveal-delay-3">
-            <div class="servico-icon">📊</div>
+          <div class="glass-card servico-card tilt reveal" style="--i:5">
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></svg>
+            </div>
             <div class="servico-cat">Finanças</div>
             <h3>Contábil</h3>
             <p>Serviços contábeis abrangentes: contabilidade fiscal, relações com investidores e compliance financeiro para sua empresa.</p>
@@ -839,56 +1060,128 @@
           <h2 class="section-title">O que nossos clientes dizem</h2>
           <p class="section-desc">Resultados reais de empresas que confiaram na Unicompass para crescer.</p>
         </div>
-        <div class="dep-grid">
+        <div class="dep-marquee reveal" aria-label="Carrossel de depoimentos">
+          <div class="dep-track" id="dep-track">
+            <!-- 6 cards x2 (loops seamlessly). Edite o conteúdo para inserir depoimentos reais. -->
 
-          <!-- Card 1 — vazio -->
-          <div class="glass-card dep-card reveal reveal-delay-1">
-            <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
-            <div class="dep-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <div class="dep-quote empty"> </div>
-            <div class="dep-author">
-              <div class="dep-avatar empty"></div>
-              <div>
-                <div class="dep-name empty"> </div>
-                <div class="dep-role empty"> </div>
+            <div class="glass-card dep-card tilt">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"A Unicompass reorganizou nossa operação financeira e nos deu clareza para crescer. Em 6 meses, dobramos a margem operacional."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">CR</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
               </div>
             </div>
-          </div>
 
-          <!-- Card 2 — vazio -->
-          <div class="glass-card dep-card reveal reveal-delay-2">
-            <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
-            <div class="dep-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <div class="dep-quote empty"> </div>
-            <div class="dep-author">
-              <div class="dep-avatar empty"></div>
-              <div>
-                <div class="dep-name empty"> </div>
-                <div class="dep-role empty"> </div>
+            <div class="glass-card dep-card tilt">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"Time de R&amp;S impecável. Trouxeram candidatos alinhados à nossa cultura e reduziram o tempo de contratação em 60%."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">MS</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
               </div>
             </div>
-          </div>
 
-          <!-- Card 3 — vazio -->
-          <div class="glass-card dep-card reveal reveal-delay-3">
-            <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
-            <div class="dep-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <div class="dep-quote empty"> </div>
-            <div class="dep-author">
-              <div class="dep-avatar empty"></div>
-              <div>
-                <div class="dep-name empty"> </div>
-                <div class="dep-role empty"> </div>
+            <div class="glass-card dep-card tilt">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"A consultoria estratégica nos abriu portas para mercados que pareciam fora do alcance. Resultado real, com método."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">AT</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
               </div>
             </div>
-          </div>
 
+            <div class="glass-card dep-card tilt">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"O programa de DHO transformou nossa liderança. Times mais engajados, indicadores melhores e cultura mais forte."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">JP</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+
+            <div class="glass-card dep-card tilt">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"Implementamos ESG com a Unicompass e conquistamos contratos que exigiam comprovação de práticas responsáveis."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">LF</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+
+            <div class="glass-card dep-card tilt">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"Os treinamentos elevaram o padrão técnico do time. Conteúdo prático, aplicável e com resultado em poucas semanas."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">RB</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+
+            <!-- DUPLICATE for seamless loop -->
+
+            <div class="glass-card dep-card tilt" aria-hidden="true">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"A Unicompass reorganizou nossa operação financeira e nos deu clareza para crescer. Em 6 meses, dobramos a margem operacional."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">CR</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+            <div class="glass-card dep-card tilt" aria-hidden="true">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"Time de R&amp;S impecável. Trouxeram candidatos alinhados à nossa cultura e reduziram o tempo de contratação em 60%."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">MS</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+            <div class="glass-card dep-card tilt" aria-hidden="true">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"A consultoria estratégica nos abriu portas para mercados que pareciam fora do alcance. Resultado real, com método."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">AT</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+            <div class="glass-card dep-card tilt" aria-hidden="true">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"O programa de DHO transformou nossa liderança. Times mais engajados, indicadores melhores e cultura mais forte."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">JP</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+            <div class="glass-card dep-card tilt" aria-hidden="true">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"Implementamos ESG com a Unicompass e conquistamos contratos que exigiam comprovação de práticas responsáveis."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">LF</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+            <div class="glass-card dep-card tilt" aria-hidden="true">
+              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              <p class="dep-quote">"Os treinamentos elevaram o padrão técnico do time. Conteúdo prático, aplicável e com resultado em poucas semanas."</p>
+              <div class="dep-author">
+                <div class="dep-avatar photo">RB</div>
+                <div><div class="dep-name">[Nome do Cliente]</div><div class="dep-role">[Cargo · Empresa]</div></div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </section>
@@ -1258,6 +1551,174 @@
       form.style.display = 'none';
       success.classList.add('visible');
     });
+
+    // =====================================================
+    // ===========  PREMIUM ENHANCEMENTS  ==================
+    // =====================================================
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- PARTICLES CANVAS ---
+    (function initParticles() {
+      const canvas = document.getElementById('particles');
+      if (!canvas || prefersReducedMotion) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr;
+      let particles = [];
+      const COUNT = window.innerWidth < 768 ? 28 : 60;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.clientWidth; h = canvas.clientHeight;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      function makeParticles() {
+        particles = [];
+        for (let i = 0; i < COUNT; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 1.6 + 0.4,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            a: Math.random() * 0.6 + 0.2,
+            twk: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+      function tick() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of particles) {
+          p.x += p.vx; p.y += p.vy;
+          p.twk += 0.02;
+          if (p.x < -10) p.x = w + 10;
+          if (p.x > w + 10) p.x = -10;
+          if (p.y < -10) p.y = h + 10;
+          if (p.y > h + 10) p.y = -10;
+          const flicker = 0.6 + 0.4 * Math.sin(p.twk);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(120, 200, 255,' + (p.a * flicker).toFixed(3) + ')';
+          ctx.shadowColor = 'rgba(0,174,239,0.7)';
+          ctx.shadowBlur = 8;
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0;
+        requestAnimationFrame(tick);
+      }
+      resize(); makeParticles(); tick();
+      window.addEventListener('resize', () => { resize(); makeParticles(); });
+    })();
+
+    // --- HERO MOUSE PARALLAX ---
+    (function initHeroParallax() {
+      const hero = document.getElementById('inicio');
+      const content = hero && hero.querySelector('.hero-content');
+      const compassWrap = hero && hero.querySelector('.hero-compass-wrap');
+      const compass3d = document.getElementById('compass-3d');
+      if (!hero || !content || !compassWrap || prefersReducedMotion) return;
+
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      let targetX = 0, targetY = 0;
+
+      hero.addEventListener('mousemove', (e) => {
+        const r = hero.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width  - 0.5;  // -0.5..0.5
+        const ny = (e.clientY - r.top)  / r.height - 0.5;
+        targetX = nx; targetY = ny;
+      });
+      hero.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
+
+      function loop() {
+        cx += (targetX - cx) * 0.08;
+        cy += (targetY - cy) * 0.08;
+        content.style.transform     = `translate3d(${cx * -10}px, ${cy * -8}px, 0)`;
+        compassWrap.style.transform = `translate3d(${cx *  18}px, ${cy * 14}px, 0)`;
+        if (compass3d) {
+          compass3d.style.transform = `rotateY(${cx * 12}deg) rotateX(${cy * -12}deg)`;
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    // --- CARD TILT + cursor glow ---
+    (function initTilt() {
+      const cards = document.querySelectorAll('.tilt');
+      cards.forEach(card => {
+        let raf = null;
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left;
+          const y = e.clientY - r.top;
+          const cxp = (x / r.width) * 100;
+          const cyp = (y / r.height) * 100;
+          card.style.setProperty('--mx', cxp + '%');
+          card.style.setProperty('--my', cyp + '%');
+          if (prefersReducedMotion) return;
+          const rx = ((y / r.height) - 0.5) * -8;
+          const ry = ((x / r.width)  - 0.5) *  8;
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    })();
+
+    // --- BUTTON RIPPLE ---
+    (function initRipple() {
+      const btns = document.querySelectorAll('.btn-primary, .btn-outline, .btn-wa-nav, .btn-submit, .lgpd-btn-accept, .lgpd-btn-decline');
+      btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const r = btn.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          const size = Math.max(r.width, r.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - r.left) + 'px';
+          ripple.style.top  = (e.clientY - r.top)  + 'px';
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 700);
+        });
+      });
+    })();
+
+    // --- SCROLL RAIL: progress + section dots ---
+    (function initScrollRail() {
+      const fill = document.getElementById('scroll-fill');
+      const dotsContainer = document.getElementById('section-dots');
+      if (!fill || !dotsContainer) return;
+
+      const sectionIds = ['inicio','sobre','servicos','depoimentos','contato'];
+      const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+      // Build dots
+      sectionEls.forEach((sec, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Ir para ' + sec.id);
+        dot.addEventListener('click', () => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        dotsContainer.appendChild(dot);
+      });
+      const dots = dotsContainer.querySelectorAll('button');
+
+      function update() {
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = Math.max(0, Math.min(1, window.scrollY / Math.max(1, docH)));
+        fill.style.height = (pct * 100) + '%';
+
+        const probe = window.scrollY + window.innerHeight * 0.4;
+        let activeIdx = 0;
+        sectionEls.forEach((s, i) => { if (s.offsetTop <= probe) activeIdx = i; });
+        dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
 
   })();
   </script>
