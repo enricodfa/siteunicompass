@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Unicompass – Soluções Empresariais. Consultoria especializada em crescimento e inovação para o seu negócio." />
+  <meta name="theme-color" content="#0a1f33" />
   <title>Unicompass – Soluções Empresariais</title>
+  <link rel="icon" type="image/png" href="logo_final.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Unicompass – Soluções Empresariais" />
+  <meta property="og:description" content="Consultoria especializada em crescimento e inovação: Consultoria Empresarial, R&S, ESG, Treinamentos, DHO e Contábil." />
+  <meta property="og:image" content="logo_final.png" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -325,7 +333,6 @@
     .sobre-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     @media (max-width: 768px) { .sobre-grid { grid-template-columns: 1fr; } }
     .sobre-card { padding: 2.25rem 2rem; }
-    .sobre-icon  { font-size: 2.25rem; margin-bottom: 1rem; }
     .sobre-card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.4rem; }
     .sobre-card h3 { font-size: 1.125rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.75rem; }
     .sobre-card p  { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; }
@@ -339,7 +346,6 @@
     @media (max-width: 1024px) { .servicos-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px)  { .servicos-grid { grid-template-columns: 1fr; } }
     .servico-card  { padding: 2rem; }
-    .servico-icon  { font-size: 2.25rem; margin-bottom: 1rem; }
     .servico-cat   { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.375rem; }
     .servico-card h3 { font-size: 1.0625rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.75rem; }
     .servico-card p  { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; }
@@ -447,7 +453,8 @@
     }
     .service-suggestion.visible { display: flex; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
-    .sug-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .sug-icon { color: var(--blue); flex-shrink: 0; display: inline-flex; }
+    .sug-icon svg { width: 20px; height: 20px; }
     .sug-text { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; }
     .sug-text strong { color: var(--text-primary); }
 
@@ -464,7 +471,8 @@
 
     .form-success { display: none; text-align: center; padding: 3rem 2rem; }
     .form-success.visible { display: block; }
-    .form-success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+    .form-success-icon { color: var(--green-wa); margin-bottom: 1rem; display: flex; justify-content: center; }
+    .form-success-icon svg { width: 56px; height: 56px; }
     .form-success h3 { font-size: 1.375rem; font-weight: 900; color: var(--text-primary); margin-bottom: 0.75rem; }
     .form-success p { color: var(--text-secondary); }
 
@@ -479,6 +487,16 @@
     .ci-value { font-size: 0.9375rem; color: var(--text-primary); font-weight: 500; }
     .ci-value a { color: var(--text-primary); transition: color var(--transition); }
     .ci-value a:hover { color: var(--blue); }
+
+    .social-row { display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap; }
+    .social-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      background: rgba(0,174,239,0.10); border: 1px solid rgba(0,174,239,0.22);
+      color: var(--blue);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .social-btn:hover { background: rgba(0,174,239,0.22); transform: translateY(-2px); }
 
     /* Active nav link */
     .nav-links a.active { color: var(--blue) !important; }
@@ -757,7 +775,7 @@
   <nav id="navbar" role="navigation" aria-label="Navegação principal">
     <div class="container nav-inner">
       <a href="#inicio" class="nav-logo" aria-label="Unicompass — página inicial">
-        <img src="logo_final.png" alt="Unicompass" />
+        <img src="logo_final.png" alt="Unicompass" width="470" height="221" />
       </a>
       <div class="nav-links">
         <a href="#inicio">Início</a>
@@ -970,19 +988,25 @@
         </div>
         <div class="sobre-grid cascade">
           <div class="glass-card sobre-card tilt reveal" style="--i:0">
-            <div class="sobre-icon">🎯</div>
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
             <div class="sobre-card-label">Missão</div>
             <h3>Nossa Missão</h3>
             <p>Orientar empresas com soluções estratégicas que geram crescimento real e sustentável, impactando positivamente cada negócio que atendemos.</p>
           </div>
           <div class="glass-card sobre-card tilt reveal" style="--i:1">
-            <div class="sobre-icon">🌟</div>
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
             <div class="sobre-card-label">Visão</div>
             <h3>Nossa Visão</h3>
             <p>Ser referência em consultoria empresarial, reconhecida pela excelência e pelo impacto real nos resultados dos nossos clientes.</p>
           </div>
           <div class="glass-card sobre-card tilt reveal" style="--i:2">
-            <div class="sobre-icon">💎</div>
+            <div class="servico-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9l4-6z"/><path d="M2 9h20"/><path d="M12 22 8 9l4-6 4 6-4 13"/></svg>
+            </div>
             <div class="sobre-card-label">Valores</div>
             <h3>Nossos Valores</h3>
             <p>Ética, transparência, inovação e comprometimento com o sucesso de cada cliente em cada etapa da jornada.</p>
@@ -1065,7 +1089,7 @@
             <!-- 6 cards x2 (loops seamlessly). Edite o conteúdo para inserir depoimentos reais. -->
 
             <div class="glass-card dep-card tilt">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"A Unicompass reorganizou nossa operação financeira e nos deu clareza para crescer. Em 6 meses, dobramos a margem operacional."</p>
               <div class="dep-author">
@@ -1075,7 +1099,7 @@
             </div>
 
             <div class="glass-card dep-card tilt">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"Time de R&amp;S impecável. Trouxeram candidatos alinhados à nossa cultura e reduziram o tempo de contratação em 60%."</p>
               <div class="dep-author">
@@ -1085,7 +1109,7 @@
             </div>
 
             <div class="glass-card dep-card tilt">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"A consultoria estratégica nos abriu portas para mercados que pareciam fora do alcance. Resultado real, com método."</p>
               <div class="dep-author">
@@ -1095,7 +1119,7 @@
             </div>
 
             <div class="glass-card dep-card tilt">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"O programa de DHO transformou nossa liderança. Times mais engajados, indicadores melhores e cultura mais forte."</p>
               <div class="dep-author">
@@ -1105,7 +1129,7 @@
             </div>
 
             <div class="glass-card dep-card tilt">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"Implementamos ESG com a Unicompass e conquistamos contratos que exigiam comprovação de práticas responsáveis."</p>
               <div class="dep-author">
@@ -1115,7 +1139,7 @@
             </div>
 
             <div class="glass-card dep-card tilt">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"Os treinamentos elevaram o padrão técnico do time. Conteúdo prático, aplicável e com resultado em poucas semanas."</p>
               <div class="dep-author">
@@ -1127,7 +1151,7 @@
             <!-- DUPLICATE for seamless loop -->
 
             <div class="glass-card dep-card tilt" aria-hidden="true">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"A Unicompass reorganizou nossa operação financeira e nos deu clareza para crescer. Em 6 meses, dobramos a margem operacional."</p>
               <div class="dep-author">
@@ -1136,7 +1160,7 @@
               </div>
             </div>
             <div class="glass-card dep-card tilt" aria-hidden="true">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"Time de R&amp;S impecável. Trouxeram candidatos alinhados à nossa cultura e reduziram o tempo de contratação em 60%."</p>
               <div class="dep-author">
@@ -1145,7 +1169,7 @@
               </div>
             </div>
             <div class="glass-card dep-card tilt" aria-hidden="true">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"A consultoria estratégica nos abriu portas para mercados que pareciam fora do alcance. Resultado real, com método."</p>
               <div class="dep-author">
@@ -1154,7 +1178,7 @@
               </div>
             </div>
             <div class="glass-card dep-card tilt" aria-hidden="true">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"O programa de DHO transformou nossa liderança. Times mais engajados, indicadores melhores e cultura mais forte."</p>
               <div class="dep-author">
@@ -1163,7 +1187,7 @@
               </div>
             </div>
             <div class="glass-card dep-card tilt" aria-hidden="true">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"Implementamos ESG com a Unicompass e conquistamos contratos que exigiam comprovação de práticas responsáveis."</p>
               <div class="dep-author">
@@ -1172,7 +1196,7 @@
               </div>
             </div>
             <div class="glass-card dep-card tilt" aria-hidden="true">
-              <div class="dep-placeholder-badge">✏️ Adicionar depoimento</div>
+              <div class="dep-placeholder-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Adicionar depoimento</div>
               <div class="dep-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
               <p class="dep-quote">"Os treinamentos elevaram o padrão técnico do time. Conteúdo prático, aplicável e com resultado em poucas semanas."</p>
               <div class="dep-author">
@@ -1247,7 +1271,7 @@
                 <label class="form-label" for="message">Mensagem <span class="req">*</span></label>
                 <textarea id="message" name="message" class="form-control" placeholder="Descreva como podemos ajudar sua empresa..." required></textarea>
                 <div class="service-suggestion" id="service-suggestion">
-                  <span class="sug-icon">💡</span>
+                  <span class="sug-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></span>
                   <div class="sug-text">Parece que você pode precisar de <strong id="suggestion-name">R&amp;S</strong>. Selecionamos automaticamente para você!</div>
                 </div>
               </div>
@@ -1257,7 +1281,7 @@
               </button>
             </form>
             <div class="form-success" id="form-success">
-              <div class="form-success-icon">✅</div>
+              <div class="form-success-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
               <h3>Mensagem enviada!</h3>
               <p>Nossa equipe entrará em contato em breve. Obrigado pelo interesse na Unicompass!</p>
             </div>
@@ -1306,23 +1330,17 @@
               </div>
             </div>
             <!-- Redes sociais -->
-            <div style="display:flex;gap:0.75rem;margin-top:0.5rem;flex-wrap:wrap;">
+            <div class="social-row">
               <!-- Instagram -->
-              <a href="https://www.instagram.com/unicompassoficial/" target="_blank" rel="noopener"
-                 style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);background:rgba(0,174,239,0.10);border:1px solid rgba(0,174,239,0.22);color:var(--blue);transition:background var(--transition),transform var(--transition);"
-                 aria-label="Instagram" onmouseover="this.style.background='rgba(0,174,239,0.22)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(0,174,239,0.10)';this.style.transform='translateY(0)'">
+              <a href="https://www.instagram.com/unicompassoficial/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
               </a>
               <!-- Facebook -->
-              <a href="https://www.facebook.com/unicompassoficial" target="_blank" rel="noopener"
-                 style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);background:rgba(0,174,239,0.10);border:1px solid rgba(0,174,239,0.22);color:var(--blue);transition:background var(--transition),transform var(--transition);"
-                 aria-label="Facebook" onmouseover="this.style.background='rgba(0,174,239,0.22)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(0,174,239,0.10)';this.style.transform='translateY(0)'">
+              <a href="https://www.facebook.com/unicompassoficial" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               </a>
               <!-- LinkedIn -->
-              <a href="https://www.linkedin.com/company/unicompassoficial/" target="_blank" rel="noopener"
-                 style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-sm);background:rgba(0,174,239,0.10);border:1px solid rgba(0,174,239,0.22);color:var(--blue);transition:background var(--transition),transform var(--transition);"
-                 aria-label="LinkedIn" onmouseover="this.style.background='rgba(0,174,239,0.22)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(0,174,239,0.10)';this.style.transform='translateY(0)'">
+              <a href="https://www.linkedin.com/company/unicompassoficial/" target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
             </div>
@@ -1338,7 +1356,7 @@
   <footer>
     <div class="container footer-inner">
       <a href="#inicio" class="footer-logo" aria-label="Unicompass — topo da página">
-        <img src="logo_final.png" alt="Unicompass" />
+        <img src="logo_final.png" alt="Unicompass" width="470" height="221" loading="lazy" />
       </a>
       <nav class="footer-links" aria-label="Links do rodapé">
         <a href="#inicio">Início</a>
@@ -1347,7 +1365,7 @@
         <a href="#depoimentos">Depoimentos</a>
         <a href="#contato">Contato</a>
       </nav>
-      <p class="footer-copy">© 2025 Unicompass. Todos os direitos reservados.</p>
+      <p class="footer-copy">© <span id="copy-year">2026</span> Unicompass. Todos os direitos reservados.</p>
     </div>
   </footer>
 
@@ -1381,6 +1399,9 @@
   (function () {
     'use strict';
 
+    // --- Ano do copyright ---
+    document.getElementById('copy-year').textContent = new Date().getFullYear();
+
     // --- Navbar scroll + active link ---
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-links a');
@@ -1410,12 +1431,28 @@
       hamburger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     });
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    function closeMobileMenu() {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
-    }));
+    }
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+    // Esc fecha menu mobile e chatbot
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      if (mobileMenu.classList.contains('open')) closeMobileMenu();
+      const cbBtnEl = document.getElementById('chatbot-toggle');
+      const cbWinEl = document.getElementById('chatbot-window');
+      if (cbWinEl.classList.contains('open')) {
+        cbBtnEl.classList.remove('open');
+        cbWinEl.classList.remove('open');
+        cbBtnEl.setAttribute('aria-expanded', 'false');
+        cbWinEl.setAttribute('aria-hidden', 'true');
+        cbBtnEl.focus();
+      }
+    });
 
     // --- Reveal on scroll ---
     const revealEls = document.querySelectorAll('.reveal');
@@ -1749,7 +1786,8 @@
     }
     #lgpd-banner.visible { transform: translateY(0); }
     .lgpd-text { display: flex; align-items: flex-start; gap: 0.875rem; flex: 1; min-width: 0; }
-    .lgpd-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .lgpd-icon { color: var(--blue); flex-shrink: 0; margin-top: 2px; display: inline-flex; }
+    .lgpd-icon svg { width: 24px; height: 24px; }
     .lgpd-text p { font-size: 0.875rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin: 0; }
     .lgpd-text p strong { color: #fff; }
     .lgpd-text a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
@@ -1781,7 +1819,7 @@
 
   <div id="lgpd-banner" role="dialog" aria-label="Aviso de cookies e privacidade" aria-live="polite">
     <div class="lgpd-text">
-      <span class="lgpd-icon">🍪</span>
+      <span class="lgpd-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg></span>
       <p>
         <strong>Privacidade e Cookies.</strong> Este site utiliza cookies para melhorar sua experiência de navegação.
         Ao continuar, você concorda com nossa política de uso de dados, em conformidade com a
